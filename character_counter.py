@@ -11,10 +11,12 @@ for letter in myString:
     #else:
     #    counter[letter] = 1
 
-for i in counter:
+keys = list(counter.key())
+keys.sort()
+
+for i in keys:
     print(i, ': ', end='')
     for j in range(counter[i]):
         print('+', end='')
     print('> %d' % counter[i])
 
-    
