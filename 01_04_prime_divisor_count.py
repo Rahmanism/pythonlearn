@@ -33,7 +33,7 @@ for n in mainNumbers:
 
 max = mainNumbers[0]
 for i in mainNumbers:
-    if primeCount[i] > primeCount[max] \
+    if primeCount[i] >= primeCount[max] \
         and i > max:
         max = i
 
