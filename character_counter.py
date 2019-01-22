@@ -11,7 +11,7 @@ for letter in myString:
     #else:
     #    counter[letter] = 1
 
-keys = list(counter.key())
+keys = list(counter.keys())
 keys.sort()
 
 for i in keys:
