@@ -9,7 +9,7 @@ for row in reader:
     these_grades = list()
     for grade in row[1:]:
         these_grades.append(int(grade))
-        grades[row[0]] = these_grades
+    grades[row[0]] = these_grades
 
 print('Averages:................')
 for item in grades:
