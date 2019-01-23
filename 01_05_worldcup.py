@@ -58,12 +58,13 @@ calc_points(unsortedStandings)
 standings = list(unsortedStandings.items())
 standings.sort(key=lambda x: x[1]['points'], reverse=True)
 
-sorting = list()
+sorting = [0, 1, 2, 3]
 for i in range(len(standings) - 1):
     iPlusOne = False
-    if standings[i][1]['points'] == standings[i + 1][1]['points']:
-        if standings[i][1]['wins'] >= standings[i + 1][1]['wins']:
-            if standings[i][0] > standings[i + 1][0]:
+    x = sorting[i]
+    if standings[x][1]['points'] == standings[x + 1][1]['points']:
+        if standings[x][1]['wins'] >= standings[x + 1][1]['wins']:
+            if standings[x][0] > standings[x + 1][0]:
                 iPlusOne = True
             else:
                 iPlusOne = False
@@ -73,14 +74,8 @@ for i in range(len(standings) - 1):
         iPlusOne = False
 
     if iPlusOne:
-        sorting.append(i + 1)
-    else:
-        sorting.append(i)
-
-if iPlusOne:
-    sorting.append(i)
-else:
-    sorting.append(i + 1)
+        sorting[i], sorting[i + 1] = sorting[i + 1], sorting[i]
+        
 
 lastList = [x for _,x in sorted(zip(sorting,standings))]
 
