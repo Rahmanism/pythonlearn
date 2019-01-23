@@ -1,4 +1,5 @@
 # Chaper 01 - Unit 05 - Worl Cup Group B standings
+import sys
 
 """
 Order of games:
@@ -51,7 +52,26 @@ calc(portugal, morocco, results[5])
 
 calc_points(unsortedStandings)
 
-standings = list()
+standings = list(unsortedStandings.items())
+standings.sort(key=lambda x:x[1]['points'], reverse=True)
+
+sorting = list()
+for i in range(len(standings) - 1):
+    print(i)
+    print(standings[i], standings[i][1]['points'])
+    print(standings[i+1], standings[i + 1][1]['points'])
+    if standings[i][1]['points'] == standings[i + 1][1]['points']:
+        if standings[i][1]['wins'] >= standings[i + 1][1]['wins']:
+            if standings[i][0] > standings[i + 1][0]:
+                sorting.append(i + 1)
+    else:
+        sorting.append(i)
+    print(sorting)
+    input()
+    
+
+print(sorting)
+sys.exit()
 
 top = 'Iran'
 for i in unsortedStandings:
