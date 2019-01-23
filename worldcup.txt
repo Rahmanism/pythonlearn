@@ -1,0 +1,50 @@
+Example 1:
+2-2
+2-1
+1-2
+2-2
+3-1
+2-1
+Result:
+Spain  wins:1 , loses:0 , draws:2 , goal difference:2 , points:5
+Iran  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4
+Portugal  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4
+Morocco  wins:1 , loses:2 , draws:0 , goal difference:-2 , points:3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Example 2:
+3-1
+1-3
+1-1
+4-0
+0-0
+4-0
+
+i-s 3-1
+i-p 1-3
+i-m 1-1
+s-p 4-0
+s-m 0-0
+p-m 4-0
+
+Country		win	lose	draw	gd	points
+Iran		1	1	1	0	4
+Spain		1	1	1	2	4
+Portugal	2	1	0	2	6
+Morocco		0	1	2	-4	2
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Example 3:
+1-0
+1-1
+2-3
+1-0
+0-0
+3-2
+
+Iran  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4
+Morocco  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4 
+Portugal  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4
+Spain  wins:1 , loses:1 , draws:1 , goal difference:0 , points:4
+
