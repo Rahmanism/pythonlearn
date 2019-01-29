@@ -10,6 +10,7 @@ spain - Morocco
 Portugal - Morocco
 """
 
+
 def calc(first, second, result):
     x, y = result.split('-')
     x = int(x)
@@ -59,26 +60,18 @@ standings = list(unsortedStandings.items())
 standings.sort(key=lambda x: x[1]['points'], reverse=True)
 
 sorting = [0, 1, 2, 3]
-for i in range(len(standings) - 1):
-    iPlusOne = False
-    x = sorting[i]
-    if standings[x][1]['points'] == standings[x + 1][1]['points']:
-        if standings[x][1]['wins'] >= standings[x + 1][1]['wins']:
-            if standings[x][0] > standings[x + 1][0]:
-                iPlusOne = True
-            else:
-                iPlusOne = False
-        else:
-            iPlusOne = False
-    else:
-        iPlusOne = False
+n = len(sorting)
+for i in range(n):
+    for j in range(n-i-1):
+        x = sorting[j]
+        if standings[x][1]['points'] == standings[x+1][1]['points']:
+            if standings[x][1]['wins'] >= standings[x+1][1]['wins']:
+                if standings[x][0] > standings[x+1][0]:
+                    sorting[j], sorting[j+1] = sorting[j+1], sorting[j]
 
-    if iPlusOne:
-        sorting[i], sorting[i + 1] = sorting[i + 1], sorting[i]
-        
 
-lastList = [x for _,x in sorted(zip(sorting,standings))]
+lastList = [x for _, x in sorted(zip(sorting, standings))]
 
 for i in lastList:
-    print('%s  wins:%d , loses:%d , draws:%d , goal difference:%d , points:%d' % \
+    print('%s  wins:%d , loses:%d , draws:%d , goal difference:%d , points:%d' %
           (i[0], i[1]['wins'], i[1]['loses'], i[1]['draws'], i[1]['goal difference'], i[1]['points']))
