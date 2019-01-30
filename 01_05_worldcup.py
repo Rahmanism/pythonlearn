@@ -65,7 +65,9 @@ for i in range(n):
     for j in range(n-i-1):
         x = sorting[j]
         if standings[x][1]['points'] == standings[x+1][1]['points']:
-            if standings[x][1]['wins'] >= standings[x+1][1]['wins']:
+            if standings[x][1]['wins'] > standings[x+1][1]['wins']:
+                    sorting[j], sorting[j+1] = sorting[j+1], sorting[j]
+            elif standings[x][1]['wins'] == standings[x+1][1]['wins']:
                 if standings[x][0] > standings[x+1][0]:
                     sorting[j], sorting[j+1] = sorting[j+1], sorting[j]
 
