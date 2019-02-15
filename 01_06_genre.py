@@ -16,7 +16,7 @@ h Adventure Action
 h Romance History
 """
 
-base_genres= ['Action', 'Adventure', 'Comedy', 'History', 'Horror', 'Romance']
+base_genres = ['Action', 'Adventure', 'Comedy', 'History', 'Horror', 'Romance']
 number_of_people = int(input())
 data_list = list()
 
@@ -30,7 +30,7 @@ for i in range(number_of_people):
             data_list[i][j], 0) + 1
 
 for i in range(len(base_genres)):
-        numbers_list[base_genres[i]] = numbers_list.get(base_genres[i], 0)
+    numbers_list[base_genres[i]] = numbers_list.get(base_genres[i], 0)
 
 sorted_1st = list()
 sorted_keys = list()
@@ -48,8 +48,10 @@ for i in range(n):
     for j in range(n-i-1):
         if sorted_values[j] == sorted_values[j+1]:
             if sorted_keys[j] > sorted_keys[j+1]:
-                sorted_values[j], sorted_values[j+1] = sorted_values[j+1], sorted_values[j]
-                sorted_keys[j], sorted_keys[j+1] = sorted_keys[j+1], sorted_keys[j]
+                sorted_values[j], sorted_values[j +
+                                                1] = sorted_values[j+1], sorted_values[j]
+                sorted_keys[j], sorted_keys[j +
+                                            1] = sorted_keys[j+1], sorted_keys[j]
                 sorting[j], sorting[j+1] = sorting[j+1], sorting[j]
 
 for i in range(n):
