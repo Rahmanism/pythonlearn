@@ -11,6 +11,13 @@ Output:
 15:Iran
 17:Persian
 18:League
+
+Example 2:
+Input:
+My name is ahmad. please come to see me.
+
+Output:
+None
 """
 
 p = input()
@@ -30,5 +37,8 @@ for i in range(1, len(words)):
     if ord(words[i][0]) >= 65 and ord(words[i][0]) <= 90:
         indices.append((i+1,words[i]))
 
-for i in range(len(indices)):
-    print('%i:%s' % (indices[i][0], indices[i][1]))
+if len(indices) > 0:
+    for i in range(len(indices)):
+        print('%i:%s' % (indices[i][0], indices[i][1]))
+else:
+    print('None')
