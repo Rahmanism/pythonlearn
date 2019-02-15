@@ -1,5 +1,4 @@
 # Chapter 01 - Unit 06 - Movie genres statistics
-import sys
 
 """
 Example:
