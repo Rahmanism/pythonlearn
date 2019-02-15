@@ -9,8 +9,15 @@ hossein Horror Romance Comedy
 mohsen Horror Action Comedy
 mina Adventure Action History
 sajjad Romance History Action
+
+4
+h Horror Romance History
+h Horror Action
+h Adventure Action
+h Romance History
 """
 
+base_genres= ['Action', 'Adventure', 'Comedy', 'History', 'Horror', 'Romance']
 number_of_people = int(input())
 data_list = list()
 
@@ -19,9 +26,12 @@ for i in range(number_of_people):
 
 numbers_list = dict()
 for i in range(number_of_people):
-    for j in range(1, 4):
+    for j in range(1, len(data_list[i])):
         numbers_list[data_list[i][j]] = numbers_list.get(
             data_list[i][j], 0) + 1
+
+for i in range(len(base_genres)):
+        numbers_list[base_genres[i]] = numbers_list.get(base_genres[i], 0)
 
 sorted_1st = list()
 sorted_keys = list()
