@@ -1,4 +1,5 @@
 # Chapter 01 - Unit 06 - Movie genres statistics
+import sys
 
 """
 Example:
@@ -18,28 +19,29 @@ for i in range(number_of_people):
 
 numbers_list = dict()
 for i in range(number_of_people):
-    for j in range(1, 3):
+    for j in range(1, 4):
         numbers_list[data_list[i][j]] = numbers_list.get(
             data_list[i][j], 0) + 1
 
-#numbers_list = sorted(numbers_list.iteritems(), key=lambda (k, v): (v, k), reverse=True)
-
-#numbers_list.sort(key=lambda x: x[1], reverse=True)
 sorted_1st = list()
-for k, v in sorted(numbers_list.items(), key=lambda item:(item[1], item[0]), reverse=True):
+sorted_keys = list()
+sorted_values = list()
+for k, v in sorted(numbers_list.items(), key=lambda item: (item[1], item[0]), reverse=True):
     sorted_1st.append({k: v})
+    sorted_keys.append(k)
+    sorted_values.append(v)
     #print("%s : %s" % (k, v))
 
-sorting = list()
-n = len(sorting)
-for i in range(len(list(numbers_list.keys()))):
-    sorting.append(i)
+sorting = list(range(6))
+n = len(sorted_1st)
 
-print("1:--------")
 for i in range(n):
-    # for j in range(n-i-1):
-        print(i, j)
-        print (sorted_1st[i])
+    for j in range(n-i-1):
+        if sorted_values[j] == sorted_values[j+1]:
+            if sorted_keys[j] > sorted_keys[j+1]:
+                sorted_values[j], sorted_values[j+1] = sorted_values[j+1], sorted_values[j]
+                sorted_keys[j], sorted_keys[j+1] = sorted_keys[j+1], sorted_keys[j]
+                sorting[j], sorting[j+1] = sorting[j+1], sorting[j]
 
-print("--------")
-print(sorted_1st)
+for i in range(n):
+    print('%s : %i' % (sorted_keys[i], sorted_values[i]))
