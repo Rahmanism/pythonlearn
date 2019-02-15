@@ -25,8 +25,7 @@ for i in range(number_of_people):
 for i in range(number_of_people):
     data[i] = data[i].split('.')
     data[i][0] = data[i][0].lower()
-    data[i][1] = data[i][1].lower()
-    data[i][1] = data[i][1][0].upper() + data[i][1][1:]
+    data[i][1] = data[i][1][0].upper() + data[i][1][1:].lower()
 
 data.sort(key=lambda x: x[0][0])
 
