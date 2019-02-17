@@ -42,3 +42,29 @@ mylist.sort()
 mylist = list(map(lambda x: 'color' if x=='red' else x,mylist))
 output = list(filter(lambda x: x=='red',mylist))
 print(output)
+
+###########################################
+print("#######generators")
+# generator functions yeild
+def firstn():
+    return (1,2,3)
+
+print(firstn())
+
+def firstn2():
+    yield 1
+    yield 2
+    yield 3
+
+for i in firstn2():
+    print(i)
+
+def firstn3(n):
+    num = 0
+    while (num < n):
+        yield num
+        num += 1
+
+for i in firstn3(4):
+    print(i)
+
