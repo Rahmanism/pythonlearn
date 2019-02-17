@@ -102,13 +102,51 @@ class Computer:
     def value(self):
         return self.ram + self.hard + self.cpu
 
+    def __del__(self):
+        Computer.count -= 1
+
 class Laptop(Computer):
     def value(self):
         return self.ram + self.hard + self.cpu + self.size
 
 pc1 = Computer(12, 2, 4)
 print(pc1.value())
+print(Computer.count)
 
 laptop1 = Laptop(12,1,4)
 laptop1.size = 13
 print(laptop1.value())
+print(Computer.count)
+
+del pc1
+print(Computer.count)
+
+###################### Quiz
+class mobile:
+    def __init__(self, name, brand):
+        self.name = name
+        self.brand = brand
+
+    def get_name(self):
+        return self.name
+        
+class cpu(mobile):
+    def get_name(self):
+        print("This mobile has HighTech %s CPU " % self.name)
+        
+        
+brand = cpu("Intel","Sony")
+print(brand.get_name())
+
+###########
+class maktabkhooneh:
+    def __init__(self, name, grade, age):
+        self.name = name
+        self.grade = grade
+        self.age = age
+
+    def value(self):
+        return self.name + self.grade
+        
+person = maktabkhooneh("Ahmad","Master",24)
+print(person.value())
