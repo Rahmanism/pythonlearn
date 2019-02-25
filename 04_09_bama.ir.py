@@ -18,7 +18,6 @@ cur.execute(query)
 cur.execute('use maktabxune')
 query = """\
 create table if not exists bama (
-    car varchar(255),
     car_name varchar(255),
     price varchar(100),
     km varchar(100)
@@ -27,25 +26,17 @@ create table if not exists bama (
 cur.execute(query)
 ########## end of creating DB and table
 
-
-# query = 'insert into bama (car, car_name, price, km) values (%s, %s, %s, %s)'
-# # create data
-# data = ('car', car name', 'price', 'distance km')
-# cur.execute(query, data)
-
 MAX_COUNT = 20
 BAMA_URL = 'https://bama.ir/car/'
 count = 0
 page = 1
 searched_car = input()
-query = ("insert into bama (car, car_name, price, km) "
-    "values (%s, %s, %s, %s)")
+query = "insert into bama (car_name, price, km) values (%s, %s, %s)"
 while count < MAX_COUNT:
     if page == 1:
         url = (BAMA_URL + searched_car)
     else:
         url = (BAMA_URL + searched_car + '?page=' + str(page))
-    print(url)
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
     cars = soup.find_all('div', {'class':'listdata'})
@@ -58,15 +49,19 @@ while count < MAX_COUNT:
             price = price_tag[0].text.strip().replace('\n\n', ' - ')
             km_tag = car.findChildren('p', {'class':'price hidden-xs'})
             km = km_tag[0].text.strip().replace('کارکرد ', '')
-            data = (searched_car, car_name, price, km)
+            data = (car_name, price, km)
             cur.execute(query, data)
             count += 1
-            if count > MAX_COUNT:
+            if count >= MAX_COUNT:
                 break
-    # if count > MAX_COUNT:
-    #     break
     page += 1
 
 cnx.commit()
+
+query = 'select car_name, price, km from bama'
+cur.execute(query)
+for (car_name, price, km) in cur:
+    print('%s\t%s\t%s' % (car_name, price, km))
+
 cur.close()
 cnx.close()
