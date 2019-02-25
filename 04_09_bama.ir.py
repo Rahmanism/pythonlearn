@@ -37,8 +37,11 @@ while count < MAX_COUNT:
         url = (BAMA_URL + searched_car)
     else:
         url = (BAMA_URL + searched_car + '?page=' + str(page))
-    r = requests.get(url)
+    r = requests.get(url, allow_redirects=False)
     soup = BeautifulSoup(r.text, 'html.parser')
+    # this means there's no other pages for this car
+    if soup.text == '':
+        break
     cars = soup.find_all('div', {'class':'listdata'})
     for car in cars:
         car_name_tag = car.findChildren('h2', {'itemprop':'name'})
@@ -58,10 +61,11 @@ while count < MAX_COUNT:
 
 cnx.commit()
 
-query = 'select car_name, price, km from bama'
-cur.execute(query)
-for (car_name, price, km) in cur:
-    print('%s\t%s\t%s' % (car_name, price, km))
+# if you want to see the list:
+# query = 'select car_name, price, km from bama'
+# cur.execute(query)
+# for (car_name, price, km) in cur:
+#     print('%s\t%s\t%s' % (car_name, price, km))
 
 cur.close()
 cnx.close()
