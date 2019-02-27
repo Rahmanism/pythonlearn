@@ -13,3 +13,4 @@ print(result.text)
 if len(sys.argv) > 1 and sys.argv[1] == '-c':
     print(resultComment.text.replace('\n', ''))
     print(address.text)
+input()
