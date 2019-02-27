@@ -12,8 +12,9 @@ def index(request):
 
 def fetch(request, howManyToFetch = None):
     t = get_template("fetch.html")
+    title = fetch_data.fetch()
     if howManyToFetch == None:
-        html = t.render()
+        html = t.render({'title':title})
     else:
-        html = t.render({'n':howManyToFetch})
+        html = t.render({'n':howManyToFetch, 'title':title})
     return HttpResponse(html)
