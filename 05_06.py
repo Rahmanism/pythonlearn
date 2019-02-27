@@ -13,6 +13,10 @@ with open('05_06_data.csv', 'r') as csvfile:
 clf = tree.DecisionTreeClassifier()
 clf = clf.fit(x, y)
 
-newData = [[175, 88, 42], [168,60, 39]]
+h = int(input('Height? '))
+w = int(input('Weight? '))
+s = int(input('Shoe size? '))
+newData = [[h, w, s]]
 answer = clf.predict(newData)
-print(answer)
+answer = 'male' if answer[0] == 'm' else 'female'
+print('\nYou probably are %s.' % answer)
