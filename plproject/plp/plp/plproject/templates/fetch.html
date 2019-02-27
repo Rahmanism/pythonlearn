@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=\"utf-8\">
+    <title>Fetch data</title>
+</head>
+<body>
+<h1>Python Learning Project</h1>
+<h2>Fetching Data</h2>
+<hr/>
+<div>
+    <h1>{{ n }}</h1>
+    <p>
+        How many to fetch?<br/>
+        <input type="number" id="howManyToFetch" min="1" max="200" onchange="numberChanged()"/>
+    </p>
+    <p>
+        <a id="submitFetch" href="#">Submit</a>
+    </p>
+</div>
+<div>
+    <a id="backToHome" href="./">Back to home page!</a>
+</div>
+<script type="text/javascript">
+function numberChanged() {
+    console.log('in event!');
+    n = document.getElementById('howManyToFetch').value;
+    console.log('n', n);
+    l = './' + n;
+    window.location = l;
+}
+</script>
+<body>
+</html>

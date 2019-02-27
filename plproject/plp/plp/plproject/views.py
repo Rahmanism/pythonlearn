@@ -10,6 +10,10 @@ def index(request):
     html = t.render({'name':name})
     return HttpResponse(html)
 
-def fetch(request):
-    # return HttpResponse("Hello from FETCH!")
-    return HttpResponse(fetch_data.fetch())
+def fetch(request, howManyToFetch = None):
+    t = get_template("fetch.html")
+    if howManyToFetch == None:
+        html = t.render()
+    else:
+        html = t.render({'n':howManyToFetch})
+    return HttpResponse(html)
