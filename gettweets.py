@@ -22,7 +22,7 @@ except mysql.connector.Error as err:
         print(err)
     sys.exit()
 except:
-    print('An error happend connecting to DB.')
+    print("An error happend connecting to DB.")
     sys.exit()
 
 cur = cnx.cursor()
