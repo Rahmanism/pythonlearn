@@ -1,5 +1,5 @@
 .vscode/*
 *.zip
-# gettweets_secret_keys.py
+gettweets_secret_keys.py
 __pycache__/*
 t.htm
