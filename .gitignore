@@ -1,4 +1,4 @@
 .vscode/*
 *.zip
+gettweets-secret-keys.py
 gettweets.py
- 
