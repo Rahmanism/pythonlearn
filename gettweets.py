@@ -4,18 +4,13 @@
 # 2. We use the data set for machine learning mechanism, both with supervised and unsupervised methods.
 # 3. Conceptual metaphor analyses may use the results of our project to come up with how people understand and talk about different things.
 # App use description: We will search tweets with special hashtags to create data sets that will be used for machine learning in the field of cognitive linguistics.
-# API key: hBj4e0K5T7VJnVbrGeMwJ7Gze
-# API secret key: gCiZRdcQQqbUCKSXndapOKf88njN670hQLLhHzsociEMEYzWxL 
-# Access token: 3722918664-9ZVGcOFWUuHnuhXQCw5x292zM2bLpXNZfXP94zI
-# Access token secret: YLLoZoyG8gs27nKLaR71HTETATinAqs6QDLEkdBQPwyFG
-# Dev environment label: conceptualmetaphorarch
-
 
 import sys
 import requests
 from bs4 import BeautifulSoup
 import mysql.connector
 from mysql.connector import errorcode
+from gettweets_secret_keys import *
 
 try:
     cnx = mysql.connector.connect(user='root', password='',
@@ -27,7 +22,7 @@ except mysql.connector.Error as err:
         print(err)
     sys.exit()
 except:
-    print('An error happend connecting to DB.')
+    print("An error happend connecting to DB.")
     sys.exit()
 
 cur = cnx.cursor()

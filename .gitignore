@@ -2,3 +2,6 @@
 *.zip
 t.htm 
 t.txt 
+gettweets_secret_keys.py
+__pycache__/*
+
