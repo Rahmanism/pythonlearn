@@ -15,26 +15,28 @@ def train():
         x.append(sample)
         y.append(car.price)
 
-    del x[:-1]
-    del y[:-1]
+    # check this:
+    # https://stackoverflow.com/questions/52112414/valueerror-bad-input-shape-in-sklearn-python
+    leX.fit_transform(x[0])
+    leX.fit_transform(x[1])
+    leX.fit_transform(x[2])
+    leY.fit_transform(y)
+    xt = []
+    yt = []
+    for i in range(len(x)):
+        xt.append([leX.transform(x[i][0]), leX.transform(x[i][1]), leX.transform(x[i][2])])
+        yt.append(leY.transform(y[i]))
 
-    leX.fit(x)
-    return 'T'
-    # leY.fit(y)
-    # xt = []
-    # yt = []
-    # for i in range(len(x)):
-    #     xt.append(leX.transform(x[i]))
-    #     yt.append(leY.transform(y[i]))
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(xt, yt)
 
-    # clf = tree.DecisionTreeClassifier()
-    # clf = clf.fit(xt, yt)
+    h = ''
+    h += '<h3>Trained!</h3>'
 
-    h = '<table border="1" cellpadding="3" style="border-collapse: collapse;">'
+    h += '<table border="1" cellpadding="3" style="border-collapse: collapse;">'
     h += '<tr><th>No.</th><th>Name</th><th>Year</th><th>KM</th><th>Price</th></tr>'
     for i in range(len(x)):
         t = '<tr>'
-        # t += '<td>%i</td>' % i
         t += '<td>%i</td><td>%s</td><td>%i</td><td>%s</td><td>%s</td>' % (i+1, x[i][0], x[i][1], x[i][2], y[i])
         t += '</tr>'
         h += t
