@@ -1,7 +1,6 @@
-.vscode/*
+**/.vscode/*
 *.zip
 t.htm 
 t.txt 
 gettweets_secret_keys.py
-__pycache__/*
-
+**/__pycache__/*
