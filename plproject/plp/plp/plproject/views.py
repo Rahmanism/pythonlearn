@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
 from . import fetch_data
+from . import train_data
 
 
 def index(request):
@@ -15,5 +16,16 @@ def index(request):
 def fetch(request, howManyToFetch=20):
     t = get_template("fetch.html")
     message = fetch_data.fetch(howManyToFetch)
+    html = t.render({'message': message})
+    return HttpResponse(html)
+
+
+def train(request, trainAgain=''):
+    t = get_template("train.html")
+    if trainAgain == 'y':
+        train_data.train()
+        message = 'Trained again!'
+    else:
+        message = ''
     html = t.render({'message': message})
     return HttpResponse(html)

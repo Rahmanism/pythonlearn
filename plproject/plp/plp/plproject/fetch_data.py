@@ -5,20 +5,13 @@ import re
 
 # It should fetch data from a website!
 
-
 def fetch(howManyToFetch=20):
     BAMA_URL = 'https://bama.ir/car/'
     BAMA_ALLCAR_URL = BAMA_URL + 'all-brands/all-models/all-trims'
-    # r = requests.get(BAMA_ALLCAR_URL + '?page=1')
-    # soup = BeautifulSoup(r.text, 'html.parser')
-    # searched_car = ""  # input()
 
     count = 0
     page = 1
     while count < howManyToFetch:
-        # if page == 1:
-        #     url = (BAMA_URL + searched_car)
-        # else:
         url = (BAMA_ALLCAR_URL + '?page=' + str(page))
         r = requests.get(url, allow_redirects=False)
         soup = BeautifulSoup(r.text, 'html.parser')
@@ -55,4 +48,4 @@ def fetch(howManyToFetch=20):
                     break
         page += 1
 
-    return 'Data of %i cars imported. howMany: %i' % (count, howManyToFetch)
+    return 'Data of %i cars imported.' % count
