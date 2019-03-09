@@ -3,4 +3,5 @@
 t.htm 
 t.txt 
 gettweets_secret_keys.py
-**/__pycache__/*
+**/__pycache__/
+plproject/plp/plp/plp/__pycache__/settings.cpython-37.pyc

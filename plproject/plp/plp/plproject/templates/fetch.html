@@ -3,24 +3,32 @@
 <head>
     <meta charset=\"utf-8\">
     <title>Fetch data</title>
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" />
 </head>
 <body>
-<h1>Python Learning Project</h1>
-<h2>Fetching Data</h2>
-<hr/>
-<div>
-    <h3>{{ message }}</h3>
-    <p>
-        How many to fetch again?<br/>
-        <input type="number" id="howManyToFetch" min="1" max="200" onchange="numberChanged()"/>
-    </p>
-    <p>
-        <a id="submitFetch" href="#">Submit</a>
-    </p>
-</div>
-<div>
-    <a id="backToHome" href="/plproject/">Back to home page!</a>
-</div>
+<main>
+    <header>
+        <h1>Python Learning Project</h1>
+        <h2>Fetching Data</h2>
+        <hr/>
+    </header>
+    <article>
+        <h3>{{ message }}</h3>
+        <p>
+            How many to fetch again?<br/>
+            <input type="number" id="howManyToFetch" min="1" max="200" onchange="numberChanged()"/>
+        </p>
+        <p>
+            <a id="submitFetch" href="#">Submit</a>
+        </p>
+    </article>
+    <footer>
+        <ul>
+            <li><a id="backToHome" href="/plproject/">Back to home page!</a></li>
+        </ul>
+    </footer>
+</main>
 <script type="text/javascript">
 function numberChanged() {
     console.log('in event!');

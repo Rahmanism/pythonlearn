@@ -23,8 +23,7 @@ def fetch(request, howManyToFetch=20):
 def train(request, trainAgain=''):
     t = get_template("train.html")
     if trainAgain == 'y':
-        train_data.train()
-        message = 'Trained again!'
+        message = train_data.train()
     else:
         message = ''
     html = t.render({'message': message})
