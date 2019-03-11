@@ -5,7 +5,7 @@ import re
 
 # It should fetch data from a website!
 
-def fetch(howManyToFetch=20):
+def fetch(howManyToFetch=0):
     BAMA_URL = 'https://bama.ir/car/'
     BAMA_ALLCAR_URL = BAMA_URL + 'all-brands/all-models/all-trims'
 
