@@ -48,4 +48,4 @@ def fetch(howManyToFetch=0):
                     break
         page += 1
 
-    return 'Data of %i cars imported.' % count
+    return 'Data of %i new cars imported.' % count
