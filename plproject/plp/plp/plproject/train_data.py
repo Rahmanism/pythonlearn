@@ -3,43 +3,55 @@ from sklearn import tree
 from sklearn import preprocessing
 from .models import Car
 
+"""
+db_file = 'C:\\Users\\Rahmani\\tmp\\pythonlearn\\plproject\\plp\\plp\\db.sqlite3'
+conn = sqlite3.connect(db_file)
+cur = conn.cursor()
+cur.execute('select * from plproject_cars')
+rows = cur.fetchall()
+for row in rows:
+    print(row)
+"""
 
 def train():
-    x = []
-    y = []
+    x, y = [[],[],[]], []
     cars = Car.objects.all()
-    leX = preprocessing.LabelEncoder()
+    leX = []
+    for i in range(3):
+        leX.append(preprocessing.LabelEncoder())
     leY = preprocessing.LabelEncoder()
     for car in cars:
-        sample = [car.name, car.year, car.km]
-        x.append(sample)
+        x[0].append(car.name)
+        x[1].append(car.year)
+        x[2].append(car.km)
         y.append(car.price)
 
     # check this:
     # https://stackoverflow.com/questions/52112414/valueerror-bad-input-shape-in-sklearn-python
-    leX.fit_transform(x[0])
-    leX.fit_transform(x[1])
-    leX.fit_transform(x[2])
-    leY.fit_transform(y)
-    xt = []
-    yt = []
-    for i in range(len(x)):
-        xt.append([leX.transform(x[i][0]), leX.transform(x[i][1]), leX.transform(x[i][2])])
-        yt.append(leY.transform(y[i]))
+    leXt = [[],[],[]]
+    leXt[0] = leX[0].fit_transform(x[0])
+    leXt[1] = leX[1].fit_transform(x[1])
+    leXt[2] = leX[2].fit_transform(x[2])
+    leYt = leY.fit_transform(y)
 
+    leXt_final = []
+    for i in range(len(leXt[0])):
+        leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i]])
     clf = tree.DecisionTreeClassifier()
-    clf = clf.fit(xt, yt)
+    clf = clf.fit(leXt_final, leYt)
 
     h = ''
     h += '<h3>Trained!</h3>'
 
-    h += '<table border="1" cellpadding="3" style="border-collapse: collapse;">'
-    h += '<tr><th>No.</th><th>Name</th><th>Year</th><th>KM</th><th>Price</th></tr>'
-    for i in range(len(x)):
-        t = '<tr>'
-        t += '<td>%i</td><td>%s</td><td>%i</td><td>%s</td><td>%s</td>' % (i+1, x[i][0], x[i][1], x[i][2], y[i])
-        t += '</tr>'
-        h += t
-    h += '</table>'
+    
+
+    # h += '<table border="1" cellpadding="3" style="border-collapse: collapse;">'
+    # h += '<tr><th>No.</th><th>Name</th><th>Year</th><th>KM</th><th>Price</th></tr>'
+    # for i in range(len(x)):
+    #     t = '<tr>'
+    #     t += '<td>%i</td><td>%s</td><td>%i</td><td>%s</td><td>%s</td>' % (i+1, x[i][0], x[i][1], x[i][2], y[i])
+    #     t += '</tr>'
+    #     h += t
+    # h += '</table>'
 
     return h
