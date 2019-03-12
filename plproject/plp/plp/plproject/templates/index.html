@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" />
 </head>
 <body>
 <h1>Python Learning Project</h1>
@@ -9,9 +11,11 @@
 <div>
     <p>Hi {{ name }}!</p>
 </div>
-<div>
-    <a id="fetchData" href="./fetch">Fetch Data!</a><br/>
-    <a id="train" href="./train">Train!</a><br/>
+<div class="tools">
+    <ul>
+        <li><a id="fetchData" href="./fetch">Fetch Data!</a></li>
+        <li><a id="train" href="./train">Train!</a></li>
+    </ul>
 </div>
 <body>
 </html>
