@@ -16,6 +16,8 @@ for row in rows:
 def train():
     x, y = [[],[],[]], []
     cars = Car.objects.all()
+    if len(cars) < 1:
+        return 'No data to train!'
     leX = []
     for i in range(3):
         leX.append(preprocessing.LabelEncoder())

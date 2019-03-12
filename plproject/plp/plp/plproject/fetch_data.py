@@ -26,14 +26,15 @@ def fetch(howManyToFetch=0):
                 car_name = re.sub(r'\s{2,}', ' ', n)
                 car_name_text = car_name.split('،')
                 car_year = int(car_name_text[0])
-                car_name = ''.join(car_name_text[1:])
+                car_name = car_name_text[1]
+                car_meta = ''.join(car_name_text[2:])
                 price_tag = car.findChildren('p', {'class': 'cost'})
                 car_price = price_tag[0].text.strip().replace('\n\n', ' - ')
                 km_tag = car.findChildren('p', {'class': 'price hidden-xs'})
                 car_km = km_tag[0].text.strip().replace('کارکرد ', '')
                 # to prevent reptitive data
                 c = models.Car.objects.filter(
-                    name=car_name, year=car_year, km=car_km, price=car_price)
+                    name=car_name, year=car_year, km=car_km, price=car_price, meta=car_meta)
                 if len(c) > 0:
                     continue
                 else:
@@ -42,6 +43,7 @@ def fetch(howManyToFetch=0):
                     car.year = car_year
                     car.price = car_price
                     car.km = car_km
+                    car.meta = car_meta
                     car.save()
                     count += 1
                 if count >= howManyToFetch:

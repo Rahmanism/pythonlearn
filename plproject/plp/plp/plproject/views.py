@@ -13,7 +13,7 @@ def index(request):
     return HttpResponse(html)
 
 
-def fetch(request, howManyToFetch=20):
+def fetch(request, howManyToFetch=0):
     t = get_template("fetch.html")
     message = fetch_data.fetch(howManyToFetch)
     html = t.render({'message': message})
