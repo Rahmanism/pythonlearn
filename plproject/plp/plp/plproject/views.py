@@ -22,12 +22,8 @@ def fetch(request, howManyToFetch=0):
 
 
 @csrf_exempt
-def train(request, trainAgain=''):
+def train(request, trainAgain='y'):
     t = get_template("train.html")
     message = train_data.train(request, trainAgain)
-    message += '---'
-    if request.method == "POST":
-        message += str(len(request.POST))
-        message += ' - ' + str(request.POST['car_name']) + '<br>'
     html = t.render({'message': message})
     return HttpResponse(html)

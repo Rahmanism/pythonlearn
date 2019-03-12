@@ -13,50 +13,47 @@ for row in rows:
     print(row)
 """
 
-def train(request, trainAgain = ''):
+
+def train(request, trainAgain='y'):
     msg = ''
-    if trainAgain == 'y':
-        x, y = [[],[],[]], []
+    if trainAgain == 'y' and request.method == 'POST':
+        x, y = [[], [], [], []], []
+        leX = []
+        for i in range(4):
+            leX.append(preprocessing.LabelEncoder())
+
         cars = Car.objects.all()
         if len(cars) < 1:
             return 'No data to train!'
+
         leX = []
-        for i in range(3):
+        for i in range(4):
             leX.append(preprocessing.LabelEncoder())
-        leY = preprocessing.LabelEncoder()
+
         for car in cars:
-            x[0].append(car.name)
-            x[1].append(car.year)
-            x[2].append(car.km)
+            x[0].append(car.name.strip())
+            x[1].append(car.meta.strip())
+            x[2].append(car.year)
+            x[3].append(car.km.strip())
             y.append(car.price)
 
         # check this:
         # https://stackoverflow.com/questions/52112414/valueerror-bad-input-shape-in-sklearn-python
-        leXt = [[],[],[]]
-        leXt[0] = leX[0].fit_transform(x[0])
-        leXt[1] = leX[1].fit_transform(x[1])
-        leXt[2] = leX[2].fit_transform(x[2])
-        leYt = leY.fit_transform(y)
+        leXt = [[], [], [], []]
+        for i in range(4):
+            leXt[i] = leX[i].fit_transform(x[i])
 
         leXt_final = []
         for i in range(len(leXt[0])):
-            leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i]])
+            leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i], leXt[3][i]])
         clf = tree.DecisionTreeClassifier()
-        clf = clf.fit(leXt_final, leYt)
+        clf = clf.fit(leXt_final, y)
 
-        msg += '<h3>Trained!</h3>'
+        msg += '<h3>Trained Again!</h3>'
 
-    msg += '***'
-    # TODO: get data to predict from reqeust
-    
-
-    # h += '<table border="1" cellpadding="3" style="border-collapse: collapse;">'
-    # h += '<tr><th>No.</th><th>Name</th><th>Year</th><th>KM</th><th>Price</th></tr>'
-    # for i in range(len(x)):
-    #     t = '<tr>'
-    #     t += '<td>%i</td><td>%s</td><td>%i</td><td>%s</td><td>%s</td>' % (i+1, x[i][0], x[i][1], x[i][2], y[i])
-    #     t += '</tr>'
-    #     h += t
-    # h += '</table>'
+        newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
+            0], leX[2].transform([request.POST['car_year'].strip()])[0], leX[3].transform([request.POST['car_km'].strip() + ' کیلومتر'])[0]]]
+        answer = clf.predict(newData)
+        msg += 'The answer is %s.<br>' % answer
 
     return msg
