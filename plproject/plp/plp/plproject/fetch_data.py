@@ -33,6 +33,10 @@ def fetch(howManyToFetch=0):
                 car_price = price_tag[0].text.strip().replace('\n\n', ' - ')
                 km_tag = car.findChildren('p', {'class': 'price hidden-xs'})
                 car_km = km_tag[0].text.strip().replace('کارکرد ', '')
+                car_km = car_km.replace(',','').replace('کیلومتر','').strip()
+                if car_km == 'صفر':
+                    car_km = '0'
+                car_km = int(car_km)
                 # to prevent reptitive data
                 c = models.Car.objects.filter(
                     name=car_name, year=car_year, km=car_km, price=car_price, meta=car_meta)

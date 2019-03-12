@@ -52,7 +52,7 @@ def train(request, trainAgain='y'):
         msg += '<h3>Trained Again!</h3>'
 
         newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
-            0], leX[2].transform([request.POST['car_year'].strip()])[0], leX[3].transform([request.POST['car_km'].strip() + ' کیلومتر'])[0]]]
+            0], leX[2].transform([request.POST['car_year']])[0], leX[3].transform([request.POST['car_km']])[0]]]
         answer = clf.predict(newData)
         msg += 'The answer is %s.<br>' % answer
 
