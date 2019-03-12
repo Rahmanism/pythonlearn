@@ -5,6 +5,12 @@ import re
 
 # It should fetch data from a website!
 
+def safe_cast(val, to_type, default=None):
+    try:
+        return to_type(val)
+    except (ValueError, TypeError):
+        return default
+
 def fetch(howManyToFetch=0):
     BAMA_URL = 'https://bama.ir/car/'
     BAMA_ALLCAR_URL = BAMA_URL + 'all-brands/all-models/all-trims'
@@ -34,9 +40,12 @@ def fetch(howManyToFetch=0):
                 km_tag = car.findChildren('p', {'class': 'price hidden-xs'})
                 car_km = km_tag[0].text.strip().replace('کارکرد ', '')
                 car_km = car_km.replace(',','').replace('کیلومتر','').strip()
+                if 'حواله' in car_km:
+                    car_km = '-1'
                 if car_km == 'صفر':
                     car_km = '0'
-                car_km = int(car_km)
+                # car_km = int(car_km)
+                car_km = safe_cast(car_km, int, 0)
                 # to prevent reptitive data
                 c = models.Car.objects.filter(
                     name=car_name, year=car_year, km=car_km, price=car_price, meta=car_meta)
