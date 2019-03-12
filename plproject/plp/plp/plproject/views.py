@@ -4,6 +4,7 @@ from django.template.loader import get_template
 from django.template import Context
 from . import fetch_data
 from . import train_data
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -20,11 +21,13 @@ def fetch(request, howManyToFetch=0):
     return HttpResponse(html)
 
 
+@csrf_exempt
 def train(request, trainAgain=''):
     t = get_template("train.html")
-    if trainAgain == 'y':
-        message = train_data.train()
-    else:
-        message = ''
+    message = train_data.train(request, trainAgain)
+    message += '---'
+    if request.method == "POST":
+        message += str(len(request.POST))
+        message += ' - ' + str(request.POST['car_name']) + '<br>'
     html = t.render({'message': message})
     return HttpResponse(html)

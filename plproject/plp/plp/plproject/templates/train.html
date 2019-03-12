@@ -14,6 +14,17 @@
         <hr/>
     </header>
     <article>
+        <form method="POST">
+            <p>
+                Car name: <input type="text" id="car_name" name="car_name" /><br />
+                Car meta (i.e. ۶ سیلندر): <input type="text" id="car_meta" name="car_meta" /><br />
+                Car Model (year car has been made): <input type="text" id="car_year" name="car_year" /><br />
+                KM (distance the car gone in kilometers): <input type="number" id="car_km" name="car_km" /><br />
+            </p>
+            <p>
+                <input type="submit" value="Submit" id="predict_submit" name="predict_submit" />
+            </p>
+        </form>
         <div>
             <h3>Attention:</h3>
             <div>{{ message | safe }}</div>
