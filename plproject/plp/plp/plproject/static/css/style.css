@@ -55,13 +55,36 @@ header {
 
 .tools li a {
     text-decoration: none;
-    border: 1px solid gray;
+    border: 1px solid silver;
     display: inline-block;
     padding: .5rem 1rem;
     margin: .5rem;
     min-width: 5rem;
+    width: 10rem;
+    border-radius: .3rem;
+    color: #325fb0;
+    background: #f2ffff;
 }
 
 .tools li a:hover {
-    background: #eff;
+    background: #ccf0f0;
+}
+
+.tools li a:active {
+    background: #7a9b9b;
+    color: #eff;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    background: #ddd;
+}
+
+td,
+th {
+    padding: .5rem 1rem;
+    border: 1px solid silver;
 }

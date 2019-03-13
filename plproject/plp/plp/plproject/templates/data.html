@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=\"utf-8\">
+    <title>Data!</title>
+    {% load static %}
+    <link href="{% static "css/style.css" %}" rel="stylesheet" />
+</head>
+<body>
+<main>
+    <header>
+        <h1>پروژه پایانی دوره پیشرفته پایتون</h1>
+        <h2>مشاهده حداکثر ۱۰۰ رکورد انتهایی داده‌های موجود در بانک اطلاعاتی</h2>
+        <hr/>
+    </header>
+    <article>
+        {{ message | safe }}
+    </article>
+    <footer>
+        <ul>
+            <li><a id="backToHome" href="/plproject/">بازگشت به صفحه اصلی!</a></li>
+        </ul>
+    </footer>
+</main>
+<body>
+</html>

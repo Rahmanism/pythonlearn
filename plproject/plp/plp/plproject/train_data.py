@@ -27,12 +27,6 @@ def train(request, trainAgain='y'):
     if len(cars) < 1:
         return 'داده‌ای برای آموزش در بانک اطلاعاتی وجود ندارد!'
 
-    # msg += '<table><tr><th>Name</th><th>Meta</th><th>Year</th><th>KM</th></th>'
-    # for i in range(len(cars)):
-    #     msg += '<tr><td>%s</td><td>%s</td><td>%i</td><td>%i</td></tr>' % (cars[i].name, cars[i].meta, cars[i].year, cars[i].km)
-    # msg += '</table>'
-    # return msg
-
     leX = []
     for i in range(2):
         leX.append(preprocessing.LabelEncoder())
@@ -54,7 +48,7 @@ def train(request, trainAgain='y'):
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(leXt_final, y)
 
-    msg += '<h3>آموزش ماشین انجام شد!</h3>'
+    msg += '<small>آموزش ماشین انجام شد!</small><br/><br/>'
 
     if request.method == 'POST':
         try:

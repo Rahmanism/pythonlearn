@@ -18,7 +18,7 @@
             <p>
                 نام ماشین (مثال: دانگ فنگ	): <input type="text" id="car_name" name="car_name" value="دانگ فنگ" /><br />
                 اطلاعات دیگر (مثال: H30 کراس): <input type="text" id="car_meta" name="car_meta" value="H30 کراس" /><br />
-                مدل (سال ساخت): <input type="number" id="car_year" name="car_year" value="1397" /><br />
+                مدل (سال ساخت شمسی یا میلادی): <input type="number" id="car_year" name="car_year" value="1397" /><br />
                 کارکرد (کیلومتر): <input type="number" id="car_km" name="car_km" value="0" /><br />
             </p>
             <p>
@@ -26,8 +26,8 @@
             </p>
         </form>
         <div>
-            <h3>توجه:</h3>
-            <div>{{ message | safe }}</div>
+            <h4>توجه:</h4>
+            <h3>{{ message | safe }}</h3>
         </div>
     </article>
     <footer>
