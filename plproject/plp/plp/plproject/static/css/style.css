@@ -3,6 +3,12 @@ html {
     font-family: Vazir, IranSans, Calibri, sans-serif;
 }
 
+a,
+a:visited {
+    text-decoration: none;
+    color: dodgerblue;
+}
+
 main {
     display: grid;
     grid-template-rows: auto 1fr auto;
