@@ -1,16 +1,18 @@
+html {
+    direction: rtl;
+}
+
 main {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-        "header"
-        "content"
-        "footer";
+    grid-template-areas: "header" "content" "footer";
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
     top: 0;
 }
+
 footer {
     border-top: 1px solid #ba7;
     padding: 1rem;
@@ -50,6 +52,7 @@ header {
     display: block;
     list-style: none;
 }
+
 .tools li a {
     text-decoration: none;
     border: 1px solid gray;
@@ -58,6 +61,7 @@ header {
     margin: .5rem;
     min-width: 5rem;
 }
-.tools li a:hover{
+
+.tools li a:hover {
     background: #eff;
 }

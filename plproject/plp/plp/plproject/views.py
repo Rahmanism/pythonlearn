@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
-    name = "User"
+    name = "کاربر"
     t = get_template("index.html")
     html = t.render({'name': name})
     return HttpResponse(html)

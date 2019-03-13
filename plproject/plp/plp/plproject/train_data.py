@@ -2,6 +2,7 @@ from . import models
 from sklearn import tree
 from sklearn import preprocessing
 from .models import Car
+from . import tools
 
 """
 db_file = 'C:\\Users\\Rahmani\\tmp\\pythonlearn\\plproject\\plp\\plp\\db.sqlite3'
@@ -16,44 +17,54 @@ for row in rows:
 
 def train(request, trainAgain='y'):
     msg = ''
-    if trainAgain == 'y' and request.method == 'POST':
-        x, y = [[], [], [], []], []
-        leX = []
-        for i in range(4):
-            leX.append(preprocessing.LabelEncoder())
+    # if trainAgain == 'y':
+    x, y = [[], [], [], []], []
+    leX = []
+    for i in range(2):
+        leX.append(preprocessing.LabelEncoder())
 
-        cars = Car.objects.all()
-        if len(cars) < 1:
-            return 'No data to train!'
+    cars = Car.objects.all()
+    if len(cars) < 1:
+        return 'داده‌ای برای آموزش در بانک اطلاعاتی وجود ندارد!'
 
-        leX = []
-        for i in range(4):
-            leX.append(preprocessing.LabelEncoder())
+    # msg += '<table><tr><th>Name</th><th>Meta</th><th>Year</th><th>KM</th></th>'
+    # for i in range(len(cars)):
+    #     msg += '<tr><td>%s</td><td>%s</td><td>%i</td><td>%i</td></tr>' % (cars[i].name, cars[i].meta, cars[i].year, cars[i].km)
+    # msg += '</table>'
+    # return msg
 
-        for car in cars:
-            x[0].append(car.name.strip())
-            x[1].append(car.meta.strip())
-            x[2].append(car.year)
-            x[3].append(car.km.strip())
-            y.append(car.price)
+    leX = []
+    for i in range(2):
+        leX.append(preprocessing.LabelEncoder())
 
-        # check this:
-        # https://stackoverflow.com/questions/52112414/valueerror-bad-input-shape-in-sklearn-python
-        leXt = [[], [], [], []]
-        for i in range(4):
-            leXt[i] = leX[i].fit_transform(x[i])
+    for car in cars:
+        x[0].append(car.name.strip())
+        x[1].append(car.meta.strip())
+        y.append(car.price)
 
-        leXt_final = []
-        for i in range(len(leXt[0])):
-            leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i], leXt[3][i]])
-        clf = tree.DecisionTreeClassifier()
-        clf = clf.fit(leXt_final, y)
+    leXt = [[], [], [], []]
+    for i in range(2):
+        leXt[i] = leX[i].fit_transform(x[i])
 
-        msg += '<h3>Trained Again!</h3>'
+    leXt_final = []
+    for i in range(len(leXt[0])):
+        leXt_final.append(
+            [leXt[0][i], leXt[1][i], cars[i].year, cars[i].km])
+        # leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i], leXt[3][i]])
+    clf = tree.DecisionTreeClassifier()
+    clf = clf.fit(leXt_final, y)
 
-        newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
-            0], leX[2].transform([request.POST['car_year']])[0], leX[3].transform([request.POST['car_km']])[0]]]
-        answer = clf.predict(newData)
-        msg += 'The answer is %s.<br>' % answer
+    msg += '<h3>آموزش ماشین انجام شد!</h3>'
+
+    if request.method == 'POST':
+        try:
+            newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
+                0], tools.safe_cast(request.POST['car_year'].strip(), int, 0), tools.safe_cast(request.POST['car_km'].strip(), int, 0)]]
+            # newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
+            #     0], leX[2].transform([request.POST['car_year']])[0], leX[3].transform([request.POST['car_km']])[0]]]
+            answer = clf.predict(newData)
+        except:
+            answer = 'نتوانستم قیمت را پیش بینی کنم!'
+        msg += 'قیمت احتمالی: %s<br>' % answer
 
     return msg

@@ -2,14 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 from . import models
 import re
+from . import tools
 
 # It should fetch data from a website!
-
-def safe_cast(val, to_type, default=None):
-    try:
-        return to_type(val)
-    except (ValueError, TypeError):
-        return default
 
 def fetch(howManyToFetch=0):
     BAMA_URL = 'https://bama.ir/car/'
@@ -45,7 +40,7 @@ def fetch(howManyToFetch=0):
                 if car_km == 'صفر':
                     car_km = '0'
                 # car_km = int(car_km)
-                car_km = safe_cast(car_km, int, 0)
+                car_km = tools.safe_cast(car_km, int, 0)
                 # to prevent reptitive data
                 c = models.Car.objects.filter(
                     name=car_name, year=car_year, km=car_km, price=car_price, meta=car_meta)
@@ -64,4 +59,4 @@ def fetch(howManyToFetch=0):
                     break
         page += 1
 
-    return 'Data of %i new cars imported.' % count
+    return 'داده‌های %i ماشین جدید وارد بانک اطلاعاتی شد.' % count

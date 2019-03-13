@@ -9,31 +9,30 @@
 <body>
 <main>
     <header>
-        <h1>Python Learning Project</h1>
-        <h2>Fetching Data</h2>
+        <h1>پروژه پایانی دوره پیشرفته پایتون</h1>
+        <h2>دریافت داده</h2>
+        <p>داده‌ها از وب سایت <a href="http://bama.ir/">bama.ir</a> دریافت خواهند شد.</p>
         <hr/>
     </header>
     <article>
         <h3>{{ message }}</h3>
         <p>
-            How many to fetch again?<br/>
-            <input type="number" id="howManyToFetch" min="1" max="200" onchange="numberChanged()"/>
+            اطلاعات چند ماشین دریافت شود؟<br/>
+            <input type="number" id="howManyToFetch" min="1" max="200" value="20" onchange="numberChanged()"/>
         </p>
         <p>
-            <a id="submitFetch" href="#">Submit</a>
+            <a id="submitFetch" href="#">دریافت</a>
         </p>
     </article>
     <footer>
         <ul>
-            <li><a id="backToHome" href="/plproject/">Back to home page!</a></li>
+            <li><a id="backToHome" href="/plproject/">بازگشت به صفحه اصلی!</a></li>
         </ul>
     </footer>
 </main>
 <script type="text/javascript">
 function numberChanged() {
-    console.log('in event!');
     n = document.getElementById('howManyToFetch').value;
-    console.log('n', n);
     l = './' + n;
     window.location = l;
 }
