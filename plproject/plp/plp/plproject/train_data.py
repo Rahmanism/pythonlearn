@@ -18,7 +18,7 @@ for row in rows:
 def train(request, trainAgain='y'):
     msg = ''
     # if trainAgain == 'y':
-    x, y = [[], [], [], []], []
+    x, y = [[], []], []
     leX = []
     for i in range(2):
         leX.append(preprocessing.LabelEncoder())
@@ -36,7 +36,7 @@ def train(request, trainAgain='y'):
         x[1].append(car.meta.strip())
         y.append(car.price)
 
-    leXt = [[], [], [], []]
+    leXt = [[], []]
     for i in range(2):
         leXt[i] = leX[i].fit_transform(x[i])
 
@@ -44,7 +44,6 @@ def train(request, trainAgain='y'):
     for i in range(len(leXt[0])):
         leXt_final.append(
             [leXt[0][i], leXt[1][i], cars[i].year, cars[i].km])
-        # leXt_final.append([leXt[0][i], leXt[1][i], leXt[2][i], leXt[3][i]])
     clf = tree.DecisionTreeClassifier()
     clf = clf.fit(leXt_final, y)
 
@@ -54,8 +53,6 @@ def train(request, trainAgain='y'):
         try:
             newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
                 0], tools.safe_cast(request.POST['car_year'].strip(), int, 0), tools.safe_cast(request.POST['car_km'].strip(), int, 0)]]
-            # newData = [[leX[0].transform([request.POST['car_name'].strip()])[0], leX[1].transform([request.POST['car_meta'].strip()])[
-            #     0], leX[2].transform([request.POST['car_year']])[0], leX[3].transform([request.POST['car_km']])[0]]]
             answer = clf.predict(newData)
         except:
             answer = 'نتوانستم قیمت را پیش بینی کنم!'

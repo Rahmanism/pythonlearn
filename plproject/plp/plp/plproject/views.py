@@ -33,7 +33,7 @@ def train(request, trainAgain='y'):
 def data(request):
     t = get_template("data.html")
     message = show_data.show_data()
-    html = t.render({'message':message})
+    html = t.render({'message': message})
     return HttpResponse(html)
 
 

@@ -4,7 +4,8 @@ from . import models
 import re
 from . import tools
 
-# It should fetch data from a website!
+# It should fetch data from a website (bama.ir)!
+
 
 def fetch(howManyToFetch=0):
     BAMA_URL = 'https://bama.ir/car/'
@@ -34,7 +35,7 @@ def fetch(howManyToFetch=0):
                 car_price = price_tag[0].text.strip().replace('\n\n', ' - ')
                 km_tag = car.findChildren('p', {'class': 'price hidden-xs'})
                 car_km = km_tag[0].text.strip().replace('کارکرد ', '')
-                car_km = car_km.replace(',','').replace('کیلومتر','').strip()
+                car_km = car_km.replace(',', '').replace('کیلومتر', '').strip()
                 if 'حواله' in car_km:
                     car_km = '-1'
                 if car_km == 'صفر':
