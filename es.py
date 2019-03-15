@@ -3,7 +3,7 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-def estekhare(show_comment):
+def estekhare(show_comment=False):
 	r = requests.get('http://estekhare.net/index2.php')
 	soup = BeautifulSoup(r.text, 'html.parser')
 	resultContainer  = soup.find('div', {'id':'newboxes1'})
