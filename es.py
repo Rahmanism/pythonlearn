@@ -21,7 +21,8 @@ while again:
 	showComment = len(sys.argv) > 1 and sys.argv[1] == '-c'
 	print(estekhare(showComment))
 	again_input = input('\nAgain (y/N)? ')
-	again = again_input.lower() == 'y'
+	again_input = again_input.lstrip().lower()
+	again = len(again_input) > 0 and again_input[0] == 'y'
 	print('\n')
 	
 print('bye')
