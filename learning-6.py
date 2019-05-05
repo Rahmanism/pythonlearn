@@ -54,7 +54,7 @@ def fib2(n):
     n1 = 0
     n2 = 1
     c = 1
-    for i in range(n-1):
+    for _ in range(n-1):
         c = n2 + n1
         n1 = n2
         n2 = c
@@ -62,6 +62,7 @@ def fib2(n):
 
 
 #%%
-fib2(8500)
+fib2(70500)
+
 
 #%%
