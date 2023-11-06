@@ -36,7 +36,7 @@ notebook==6.4.12
 pandocfilters==1.4.2
 parso==0.3.4
 pickleshare==0.7.5
-Pillow==8.3.2
+Pillow==10.0.1
 prometheus-client==0.6.0
 prompt-toolkit==2.0.8
 protobuf==3.18.3
